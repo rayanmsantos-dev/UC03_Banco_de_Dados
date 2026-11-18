@@ -4,9 +4,6 @@
 USE embalagens;
 
 -- ETAPA 1: dados de teste (INSERT e UPDATE)
-DESCRIBE ordem_producao;
-show tables;
-describe produto;
 
 INSERT INTO ordem_producao (data_ordem, qtd_planejada, qtd_boa, qtd_refugo, consumo_kg, unidade_codigo, produto_codigo)
 VALUES 
@@ -19,12 +16,11 @@ VALUES
 SELECT * FROM ordem_producao;
 
 
-DESCRIBE item_expedicao;
 INSERT INTO expedicao (data_saida, unidade_codigo, cliente_cnpj)
 VALUES 
 ('2026-11-06', 1, '11.111.111/0001-11'),
 ('2026-11-06', 2, '22.222.222/0001-22');
-DESCRIBE expedicao;
+
 SELECT * FROM expedicao;
 
 INSERT INTO item_expedicao (expedicao_numero, produto_codigo, quantidade, preco_cobrado)
@@ -74,9 +70,6 @@ INNER JOIN cliente c ON c.cnpj = e.cliente_cnpj
 INNER JOIN unidade u ON u.codigo = e.unidade_codigo
 INNER JOIN produto p ON p.codigo = ie.produto_codigo;
 
-describe produto;
-describe expedicao;
-
 -- QUINTA CONSULTA
 SELECT
 c.razao_social
@@ -98,8 +91,7 @@ GROUP BY o.produto_codigo
 ORDER BY total DESC;
 
 
-DESCRIBE item_expedicao;
-describe produto;
+
 DELIMITER //
 CREATE PROCEDURE sp_registrar_item(IN expedicao INT, IN produto INT, IN quantidade INT)
 BEGIN
@@ -133,8 +125,6 @@ INSERT INTO ordem_producao (data_ordem, qtd_planejada, qtd_boa, qtd_refugo, cons
 VALUES ('2026/11/09', '1000', '950', '50', '20');
 
 SELECT * FROM estoque_resina WHERE unidade_codigo = 2;
-
-describe estoque_resina;
 -- ETAPA 4: privilégios dos perfis e SHOW 
 
 
